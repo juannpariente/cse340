@@ -238,3 +238,11 @@ a:focus-visible {
         letter-spacing: -1px;
     }
 }
+
+main ul {
+    text-align: left;
+
+    & li {
+        margin-bottom: 10px;
+    }
+}
