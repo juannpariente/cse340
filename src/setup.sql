@@ -1,6 +1,3 @@
--- ========================================
--- Organization Table
--- ========================================
 CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -9,9 +6,6 @@ CREATE TABLE organization (
     logo_filename VARCHAR(255) NOT NULL
 );
 
--- ========================================
--- Insert sample data: Organizations
--- ========================================
 INSERT INTO organization (name, description, contact_email, logo_filename)
 VALUES
 ('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 'info@brightfuturebuilders.org', 'brightfuture-logo.png'),
@@ -118,3 +112,61 @@ VALUES
  'Support local animal shelters.',
  'Nashville, TN',
  '2026-10-19');
+
+ CREATE TABLE categories (
+  category_id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE project_categories (
+  project_id INT NOT NULL,
+  category_id INT NOT NULL,
+
+  PRIMARY KEY (project_id, category_id),
+
+  CONSTRAINT fk_project
+    FOREIGN KEY (project_id)
+    REFERENCES service_projects(project_id)
+    ON DELETE CASCADE,
+
+  CONSTRAINT fk_category
+    FOREIGN KEY (category_id)
+    REFERENCES categories(category_id)
+    ON DELETE CASCADE
+);
+
+INSERT INTO categories (name)
+VALUES
+('Education'),
+('Environment'),
+('Community Support'),
+('Technology'),
+('Health');
+
+INSERT INTO project_categories (project_id, category_id)
+VALUES
+
+-- Organization 1
+(1, 3), -- Community Food Drive → Community Support
+(2, 2), -- Park Cleanup Initiative → Environment
+(3, 1), -- School Supply Donation → Education
+(4, 3), -- Senior Assistance Program → Community Support
+(5, 2), -- Neighborhood Tree Planting → Environment
+
+-- Organization 2
+(6, 1), -- Youth Coding Workshop → Education
+(6, 4), -- Youth Coding Workshop → Technology
+(7, 2), -- Beach Cleanup Project → Environment
+(8, 5), -- Health Awareness Campaign → Health
+(9, 3), -- Community Sports Day → Community Support
+(10, 1), -- Book Donation Program → Education
+
+-- Organization 3
+(11, 3), -- Homeless Shelter Support → Community Support
+(12, 2), -- Environmental Education Event → Environment
+(12, 1), -- Environmental Education Event → Education
+(13, 2), -- Community Garden Project → Environment
+(13, 3), -- Community Garden Project → Community Support
+(14, 4), -- Technology Access Program → Technology
+(14, 1), -- Technology Access Program → Education
+(15, 3); -- Animal Rescue Volunteer Day → Community Support
