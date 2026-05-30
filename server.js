@@ -19,6 +19,8 @@ const app = express();
   * Configure Express middleware
   */
 
+app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
+
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
