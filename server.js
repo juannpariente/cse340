@@ -21,6 +21,10 @@ const app = express();
 
 app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 
+// Allow Express to receive and process common POST data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 

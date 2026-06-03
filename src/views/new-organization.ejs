@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<main class="container py-5">
+    
+    <div class="page-heading mx-auto text-center mb-5">
+        <h1 class="fw-bold"><%= title %></h1>
+        <p class="text-body-secondary mb-0">Fill out the form below to register a new partner organization.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm p-4 p-md-5">
+                <form action="/new-organization" method="POST">
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold">Organization Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-semibold">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="contactEmail" class="form-label fw-semibold">Contact Email</label>
+                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required />
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 0.5rem;">Create Organization</button>
+                        <a href="/organizations" class="btn btn-light" style="border-radius: 0.5rem;">Cancel</a>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+<%- include('partials/footer') %>
