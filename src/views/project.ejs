@@ -31,5 +31,12 @@
             <a class="btn btn-outline-primary" href="/category/<%= category.category_id %>"><%= category.name %></a>
         <% }) %>
     </div>
+    <div class="mt-3">
+        <a href="/assign-categories/<%= projectDetails.project_id %>" 
+           class="btn btn-outline-secondary btn-sm" 
+           style="border-radius: 0.5rem;">
+           Edit Categories
+        </a>
+    </div>
 </main>
 <%- include('partials/footer') %>

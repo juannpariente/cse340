@@ -25,3 +25,22 @@
             </div>
         </div>
     </nav>
+    <% const messages = flash(); %>
+    <% Object.keys(messages).forEach(type => { %>
+        <% if (messages[type].length > 0) { %>
+            <% messages[type].forEach(msg => { %>
+                
+                <% 
+                    // Definimos solo el color del texto según el tipo de mensaje
+                    let textColor = 'text-primary'; // Azul por defecto
+                    if (type === 'success') textColor = 'text-success'; // Verde para éxito
+                    if (type === 'error' || type === 'danger') textColor = 'text-danger'; // Rojo para error
+                %>
+
+                <p class="text-center fw-medium mb-4 <%= textColor %>">
+                    <%= msg %>
+                </p>
+
+            <% }); %>
+        <% } %>
+    <% }); %>
