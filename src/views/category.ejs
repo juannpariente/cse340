@@ -1,8 +1,14 @@
 <%- include('partials/header') %>
 <main class="container py-5">
-    <div class="page-heading mb-4">
-        <h1 class="fw-bold"><%= title %></h1>
-        <p class="text-body-secondary mb-0">Service projects in this category.</p>
+    <div class="d-flex align-items-center mb-4">
+        <div class="page-heading">
+            <h1 class="fw-bold"><%= title %></h1>
+            <p class="text-body-secondary mb-0">Service projects in this category.</p>
+        </div>
+        
+        <a href="/edit-category/<%= category.category_id %>" class="btn btn-outline-primary ms-auto">
+            Edit Category
+        </a>
     </div>
 
     <h2 class="h4 mb-3">Service Projects</h2>
@@ -13,12 +19,6 @@
                 <span aria-hidden="true">&rsaquo;</span>
             </a>
         <% }) %>
-    </div>
-
-    <div class="text-center mt-5 mb-2">
-        <a href="/new-organization" class="btn btn-primary px-4 py-2 shadow-sm" style="border-radius: 0.5rem;">
-            Add a new organization
-        </a>
     </div>
 </main>
 <%- include('partials/footer') %>
