@@ -1,11 +1,13 @@
 <%- include('partials/header') %>
 <main class="container py-5">
     <section class="card border-0 shadow-sm mb-5">
-        <a href="/edit-organization/<%= organizationDetails.organization_id %>" 
-           class="btn btn-outline-primary btn-sm position-absolute top-0 end-0 mt-3 me-3 mt-md-4 me-md-4" 
-           style="border-radius: 0.5rem; z-index: 10;">
-            Edit Organization
-        </a>
+        <% if (user && user.role_name === 'admin') { %>
+            <a href="/edit-organization/<%= organizationDetails.organization_id %>" 
+               class="btn btn-outline-primary btn-sm position-absolute top-0 end-0 mt-3 me-3 mt-md-4 me-md-4" 
+               style="border-radius: 0.5rem; z-index: 10;">
+                Edit Organization
+            </a>
+        <% } %>
         <div class="card-body p-4 p-md-5">
             <div class="d-flex flex-column flex-md-row align-items-md-center gap-4">
                 <img class="organization-logo organization-logo-lg" src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
