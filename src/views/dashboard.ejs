@@ -13,6 +13,14 @@
                     <p class="mb-0 fw-medium text-secondary">Username: <span class="text-dark"><%= email %></span></p>
                 </div>
 
+                <% if (user && user.role_name === 'admin') { %>
+                    <div class="mt-4">
+                        <a href="/users" class="btn btn-primary w-100 fw-medium shadow-sm">
+                            View Users
+                        </a>
+                    </div>
+                <% } %>
+
             </div>
             
         </div>
