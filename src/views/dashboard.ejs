@@ -21,6 +21,30 @@
                     </div>
                 <% } %>
 
+                <hr class="my-4 text-secondary opacity-25">
+
+                <h3 class="h5 fw-bold mb-3 text-dark">My volunteering projects</h3>
+
+                <% if (projects.length === 0) { %>
+                    <div class="alert alert-light text-secondary text-center border mb-0" role="alert">
+                        You are not volunteering for any projects yet.
+                    </div>
+                <% } else { %>
+                    <ul class="list-group list-group-flush border-top border-bottom">
+                        <% projects.forEach(project => { %>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                <span class="fw-medium"><%= project.title %></span>
+                                
+                                <form method="POST" action="/project/<%= project.project_id %>/unvolunteer" class="m-0">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger fw-medium">
+                                        Remove
+                                    </button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+
             </div>
             
         </div>

@@ -17,7 +17,9 @@ import {
     processNewProjectForm,
     projectValidation,
     showEditProjectForm,
-    processEditProjectForm
+    processEditProjectForm,
+    volunteerForProject,
+    unvolunteerFromProject
 } from './controllers/projects.js';
 import { showCategoriesPage,
     showCategoryDetailsPage,
@@ -95,6 +97,9 @@ router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
 
 router.get('/users', requireRole('admin'), showUsers);
+
+router.post('/project/:id/volunteer', requireLogin, volunteerForProject);
+router.post('/project/:id/unvolunteer', requireLogin, unvolunteerFromProject);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

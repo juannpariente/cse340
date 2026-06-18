@@ -1,5 +1,15 @@
 // Import any needed model functions
-import { getAllProjects, getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
+import { 
+    getAllProjects,
+    getUpcomingProjects,
+    getProjectDetails,
+    createProject,
+    updateProject,
+    addVolunteer,
+    removeVolunteer,
+    getVolunteerProjectsByUser,
+    isUserVolunteer
+} from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
@@ -39,9 +49,20 @@ const showProjectDetailsPage = async (req, res) => {
     const projectId = req.params.id;
     const projectDetails = await getProjectDetails(projectId);
     const categories = await getCategoriesByProjectId(projectId);
+
+    let isVolunteer = false;
+
+    // SOLO si el usuario está logueado
+    if (req.session && req.session.user) {
+        isVolunteer = await isUserVolunteer(
+            projectId,
+            req.session.user.user_id
+        );
+    }
+
     const title = 'Project Details';
 
-    res.render('project', { title, projectDetails, categories });
+    res.render('project', { title, projectDetails, categories, isVolunteer });
 };
 
 const showNewProjectForm = async (req, res) => {
@@ -113,6 +134,28 @@ const processEditProjectForm = async (req, res) => {
     res.redirect(`/project/${projectId}`);
 };
 
+const volunteerForProject = async (req, res) => {
+  const userId = req.session.user.user_id;
+  const projectId = req.params.id;
+
+  await addVolunteer(projectId, userId);
+
+  const redirectTo = req.headers.referer || '/dashboard';
+  
+  res.redirect(redirectTo);
+};
+
+const unvolunteerFromProject = async (req, res) => {
+  const userId = req.session.user.user_id;
+  const projectId = req.params.id;
+
+  await removeVolunteer(projectId, userId);
+
+  const redirectTo = req.headers.referer || '/dashboard';
+  
+  res.redirect(redirectTo);
+};
+
 // Export any controller functions
 export { 
   showProjectsPage,
@@ -121,5 +164,7 @@ export {
   processNewProjectForm,
   showEditProjectForm,
   processEditProjectForm,
-  projectValidation
+  projectValidation,
+  volunteerForProject,
+  unvolunteerFromProject
 };

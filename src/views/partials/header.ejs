@@ -12,38 +12,54 @@
     <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand fw-semibold" href="/">CSE 340 Service Network</a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="mainNavbar">
+                
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/organizations">Organizations</a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="/categories">Categories</a></li>
-                    <% if (isLoggedIn) { %>
-                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-                    <% } else { %>
-                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                    <% } %>
                 </ul>
+
+                <div class="d-none d-lg-block vr mx-4 text-secondary opacity-25"></div>
+                <hr class="d-lg-none text-secondary opacity-25 my-3">
+
+                <div class="d-flex flex-column flex-lg-row gap-2 align-items-lg-center">
+                    <% if (isLoggedIn) { %>
+                        <a class="btn btn-sm btn-outline-secondary fw-medium px-4 w-100" href="/logout">
+                            Logout
+                        </a>
+                    <% } else { %>
+                        <a class="btn btn-sm btn-outline-primary fw-medium px-4 w-100" href="/login">
+                            Login
+                        </a>
+                        <a class="btn btn-sm btn-primary fw-medium px-4 shadow-sm w-100" href="/register">
+                            Register
+                        </a>
+                    <% } %>
+                </div>
+
             </div>
         </div>
     </nav>
+    
     <% const messages = flash(); %>
     <% Object.keys(messages).forEach(type => { %>
         <% if (messages[type].length > 0) { %>
             <% messages[type].forEach(msg => { %>
                 
                 <% 
-                    // Definimos solo el color del texto según el tipo de mensaje
-                    let textColor = 'text-primary'; // Azul por defecto
-                    if (type === 'success') textColor = 'text-success'; // Verde para éxito
-                    if (type === 'error' || type === 'danger') textColor = 'text-danger'; // Rojo para error
+                    let textColor = 'text-primary'; 
+                    if (type === 'success') textColor = 'text-success'; 
+                    if (type === 'error' || type === 'danger') textColor = 'text-danger'; 
                 %>
 
-                <p class="text-center fw-medium mb-4 <%= textColor %>">
+                <p class="text-center fw-medium mb-4 mt-3 <%= textColor %>">
                     <%= msg %>
                 </p>
 

@@ -4,17 +4,20 @@
         <h1 class="display-5 fw-bold mb-3"><%= title %></h1>
         <h2 class="h4 text-body-secondary mb-3">Welcome to the CSE 340 Service Network!</h2>
         <p class="lead text-body-secondary mb-4">Our mission is to promote service across the world by connecting volunteers with service opportunities in their community.</p>
+        
         <div class="d-flex justify-content-center gap-2 flex-wrap mb-5">
             <a class="btn btn-primary btn-lg" href="/projects">View projects</a>
             <a class="btn btn-outline-primary btn-lg" href="/organizations">View organizations</a>
         </div>
+        
         <img class="main-logo img-fluid" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+        
         <% if (isLoggedIn) { %>
-            <p class="mt-2 mb-0">
-                <a href="/dashboard" class="link-primary text-decoration-none fw-semibold icon-link icon-link-hover">
-                    My Dashboard &rarr;
+            <div class="mt-5 mb-2">
+                <a href="/dashboard" class="btn btn-primary btn-lg px-5 shadow-sm fw-medium">
+                    Go to My Dashboard &rarr;
                 </a>
-            </p>
+            </div>
         <% } %>
     </section>
 </main>

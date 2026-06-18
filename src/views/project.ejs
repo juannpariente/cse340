@@ -16,36 +16,70 @@
             <div class="row g-3 mb-4">
                 <div class="col-12 col-md-6">
                     <div class="info-box">
-                        <span class="info-label">Date</span>
+                        <span class="info-label fw-medium text-secondary d-block mb-1">Date</span>
                         <span class="info-value"><%= new Date(projectDetails.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="info-box">
-                        <span class="info-label">Location</span>
+                        <span class="info-label fw-medium text-secondary d-block mb-1">Location</span>
                         <span class="info-value"><%= projectDetails.location %></span>
                     </div>
                 </div>
             </div>
 
-            <p class="mb-0">Organization: <a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.organization_name %></a></p>
-        </div>
+            <p class="mb-4">Organization: <a href="/organization/<%= projectDetails.organization_id %>" class="text-decoration-none fw-medium"><%= projectDetails.organization_name %></a></p>
+
+            <% if (isLoggedIn) { %>
+                <div class="mt-4 pt-4 border-top">
+                    <% if (!isVolunteer) { %>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                            <div>
+                                <h3 class="h5 fw-bold mb-1">Join this project</h3>
+                                <p class="text-secondary mb-0">Become a volunteer and help make a difference.</p>
+                            </div>
+                            <form method="POST" action="/project/<%= projectDetails.project_id %>/volunteer" class="m-0">
+                                <button type="submit" class="btn btn-primary px-4 py-2 fw-medium shadow-sm">
+                                    Volunteer Now
+                                </button>
+                            </form>
+                        </div>
+                    <% } else { %>
+                        <div class="bg-light rounded-3 p-3 d-flex align-items-center justify-content-between flex-wrap gap-3 border border-success border-opacity-25">
+                            <div>
+                                <p class="fw-bold text-success mb-0 d-flex align-items-center gap-2">
+                                    <span class="fs-5">✓</span> You are volunteering for this project
+                                </p>
+                            </div>
+                            <form method="POST" action="/project/<%= projectDetails.project_id %>/unvolunteer" class="m-0">
+                                <button type="submit" class="btn btn-outline-danger btn-sm px-3 fw-medium">
+                                    Remove volunteering
+                                </button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+            </div>
     </article>
 
-    <h2 class="h4 mb-3">Categories</h2>
-    <div class="d-flex flex-wrap gap-2">
-        <% categories.forEach(category => { %>
-            <a class="btn btn-outline-primary" href="/category/<%= category.category_id %>"><%= category.name %></a>
-        <% }) %>
-    </div>
-    <div class="mt-3">
-        <% if (user && user.role_name === 'admin') { %>
-            <a href="/assign-categories/<%= projectDetails.project_id %>" 
-               class="btn btn-outline-secondary btn-sm" 
-               style="border-radius: 0.5rem;">
-               Edit Categories
-            </a>
-        <% } %>
-    </div>
+    <section>
+        <h2 class="h4 mb-3">Categories</h2>
+        <div class="d-flex flex-wrap gap-2">
+            <% categories.forEach(category => { %>
+                <a class="btn btn-outline-primary" href="/category/<%= category.category_id %>"><%= category.name %></a>
+            <% }) %>
+        </div>
+        
+        <div class="mt-3">
+            <% if (user && user.role_name === 'admin') { %>
+                <a href="/assign-categories/<%= projectDetails.project_id %>" 
+                   class="btn btn-outline-secondary btn-sm" 
+                   style="border-radius: 0.5rem;">
+                   Edit Categories
+                </a>
+            <% } %>
+        </div>
+    </section>
 </main>
 <%- include('partials/footer') %>
