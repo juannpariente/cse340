@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            
+            <div class="card border-0 shadow-sm p-4 p-md-5">
+                
+                <h1 class="fw-bold h2 mb-1 text-center"><%= title %></h1>
+                <h2 class="h5 text-body-secondary text-center mb-4">Dashboard</h2>
+
+                <div class="bg-light p-3 rounded-3">
+                    <p class="mb-2 fw-medium text-secondary">Name: <span class="text-dark"><%= name %></span></p>
+                    <p class="mb-0 fw-medium text-secondary">Username: <span class="text-dark"><%= email %></span></p>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') %>

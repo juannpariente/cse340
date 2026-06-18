@@ -9,6 +9,13 @@
             <a class="btn btn-outline-primary btn-lg" href="/organizations">View organizations</a>
         </div>
         <img class="main-logo img-fluid" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+        <% if (isLoggedIn) { %>
+            <p class="mt-2 mb-0">
+                <a href="/dashboard" class="link-primary text-decoration-none fw-semibold icon-link icon-link-hover">
+                    My Dashboard &rarr;
+                </a>
+            </p>
+        <% } %>
     </section>
 </main>
 <%- include('partials/footer') %>
